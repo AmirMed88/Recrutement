@@ -61,7 +61,22 @@ public class EducationController {
     }
     
     
+    @GetMapping("/getEducationById/{id}")
+    public Education getEducationById(@PathVariable("id") Long id){
+        return educationService.retrieveEducation(id);
+    }
 
+    @PostMapping("/addEducations")
+    public List<Education> addEducations (@RequestBody List<Education> educations){
+        List<Education> result= educationService.addManyEducation(educations);
+        return result;
+    }
+
+    @PostMapping("/AssignExpToProfile/{idProfile}/{idEducation}")
+    public void AssignEducationToProfile (@PathVariable("idProfile") Long idProfile,@PathVariable("idEducation") Long idEducation){
+        educationService.AssignEducationToProfile(idProfile, idEducation);
+        
+    }
     
 
    

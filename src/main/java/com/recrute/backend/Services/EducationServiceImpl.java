@@ -1,16 +1,20 @@
 package com.recrute.backend.Services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.recrute.backend.models.Education;
+import com.recrute.backend.models.Profile;
 import com.recrute.backend.repositories.ContactRepository;
 import com.recrute.backend.repositories.EducationRepository;
-import com.recrute.backend.repositories.ExperienceRepository;
+import com.recrute.backend.repositories.ProfileRepository;
+import com.recrute.backend.repositories.EducationRepository;
 import com.recrute.backend.repositories.EducationRepository;
 
 @Service
@@ -26,7 +30,7 @@ public class EducationServiceImpl implements EducationService {
     EducationRepository educationRepository;
 
     @Autowired
-    ExperienceRepository experienceRepository;
+    ProfileRepository profileRepository;
 
 
     @Override
@@ -63,6 +67,27 @@ public class EducationServiceImpl implements EducationService {
     @Override
     public void deleteEducation(Long id) {
         educationRepository.deleteById(id);
+        
+    }
+
+    @Override
+    public List<Education> addManyEducation(List<Education> educations) {
+        	// List<Education> exprs=new ArrayList<Education>();
+            // for(Education e:educations){
+            //     educationRepository.save(e);
+            // }
+            educationRepository.saveAll(educations);
+            return educations;
+    }
+    
+    @Override
+    public void AssignEducationToProfile(Long idProfile,Long idEducation){
+
+        Profile prf=profileRepository.findById(idProfile).get();
+        Education ex=educationRepository.findById(idEducation).get();
+        ex.setProfile(prf);
+        educationRepository.save(ex);
+        
         
     }
 

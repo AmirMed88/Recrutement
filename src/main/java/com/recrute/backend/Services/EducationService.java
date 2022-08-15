@@ -18,4 +18,9 @@ public interface EducationService {
 
    
     void deleteEducation(Long id);
+    List<Education> addManyEducation(List<Education> educations);
+
+
+    
+    void AssignEducationToProfile(Long idProfile,Long idEducation);
 }

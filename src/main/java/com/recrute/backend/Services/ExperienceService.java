@@ -9,7 +9,7 @@ public interface ExperienceService {
     List<Experience> addManyExperience(List<Experience> experiences);
 
 
-    Experience CreateAndAffectExperienceToProfile(Experience experience,Long idProfile);
+    
     void AssignExperienceToProfile(Long idProfile,Long idExperience);
 
     Experience addExperience(Experience experience);
@@ -24,4 +24,6 @@ public interface ExperienceService {
 
    
     void deleteExperience(Long id);
+
+    Experience CreateAndAffectExperienceToProfile(Experience experience,Long idProfile);
 }

@@ -38,6 +38,11 @@ public class ProfileController {
         return profileService.retrieveAllProfiles();
     }
     
+    @GetMapping("getProfileById")
+    public Profile getProfileById(@PathVariable("id") Long id){
+        return profileService.retrieveProfile(id);
+    }
+    
   
     
 
@@ -63,22 +68,22 @@ public class ProfileController {
         return f;
     }
 
-    @PostMapping("add/addsubmission")
-    public Profile addSubmissions (@RequestBody Profile p, Contact c, Set<Education> eds,Set<Experience> exps){
-        Profile f= profileService.addSubmission(p, c, exps, eds);
-        return f;
-    }
-    @PostMapping("/add/saveSub")
-    public Profile saveSubmissions (@RequestBody Profile p, Contact c,List<Experience> exps){
-        Profile f= profileService.SaveSubmission(p, c,exps);
-        return f;
-    }
+    // // @PostMapping("add/addsubmission")
+    // // public Profile addSubmissions (@RequestBody Profile p, Contact c, Set<Education> eds,Set<Experience> exps){
+    // //     Profile f= profileService.addSubmission(p, c, exps, eds);
+    // //     return f;
+    // // }
+    // // @PostMapping("/add/saveSub")
+    // // public Profile saveSubmissions (@RequestBody Profile p, Contact c,List<Experience> exps){
+    // //     Profile f= profileService.SaveSubmission(p, c,exps);
+    // //     return f;
+    // // }
 
-    @PostMapping("/add/withexpSub")
-    public Profile saveSubmissions (@RequestBody Profile p,List<Experience> exps){
-        Profile f= profileService.SaveWithExperienceSubmission(p, exps);
-        return f;
-    }
+    // @PostMapping("/add/withexpSub")
+    // public Profile saveSubmissions (@RequestBody Profile p,List<Experience> exps){
+    //     Profile f= profileService.SaveWithExperienceSubmission(p, exps);
+    //     return f;
+    // }
 
     @PostMapping("/CreateProfileWithContact")
     public Profile addProfileWithContact (@RequestBody Profile profile,Contact contact){

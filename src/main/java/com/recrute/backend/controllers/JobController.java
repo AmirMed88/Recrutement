@@ -53,7 +53,10 @@ public class JobController {
     
     
  
-
+    @GetMapping("/getJobById/{id}")
+    public Job getExperienceById(@PathVariable("id") Long id){
+        return jobService.retrieveJob(id);
+    }
    
     @DeleteMapping("/deleteJob/{idJob}")
     public void deleteJob(@PathVariable("idJob") Long idJob){
