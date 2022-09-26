@@ -33,6 +33,11 @@ public class ContactController {
     public List<Contact> getAllContacts(){
         return contactService.retrieveAllContacts();
     }
+
+    @GetMapping("/getContactById/{id}")
+    public Contact getContactById(@PathVariable("id") Long id){
+        return contactService.retrieveContact(id);
+    }
     
     @PostMapping("/CreateContactWithProfile")
     public Contact addProfileWithContact (@RequestBody Profile profile, Contact contact){

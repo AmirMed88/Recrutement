@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 @Entity
 public class Education implements Serializable {
 
@@ -27,9 +30,10 @@ public class Education implements Serializable {
     private Long idEducation;
 
     
-    @JsonFormat(pattern = "yyyy-MM-dd")
+  
+    @Column(name="EDate")
+    @JsonFormat(pattern ="yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
-    @Column(name="Date")
     private Date Edate;
 
 
@@ -42,7 +46,8 @@ public class Education implements Serializable {
     private String achievement;
 
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
      Profile profile;
 
 
@@ -54,6 +59,13 @@ public class Education implements Serializable {
 
 
     public Education() {
+    }
+
+    public Education(Date Edate, String content, String achievement, Profile profile) {
+        this.Edate = Edate;
+        this.content = content;
+        this.achievement = achievement;
+        this.profile = profile;
     }
 
     public Education(Long idEducation, Date Edate, String content, String achievement, Profile profile) {

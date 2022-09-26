@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.recrute.backend.Services.JobService;
 
@@ -32,7 +33,7 @@ public class JobController {
 
     @PostMapping("/addJob")
     public Job addJob (@RequestBody Job job){
-        Job f= jobService.addJob(job);
+        Job f= jobService.addJob( job);
         return f;
     }
 
@@ -63,6 +64,10 @@ public class JobController {
         jobService.deleteJob(idJob);
     }
     
+    @GetMapping("/getJobByPosition/{position}")
+    public List<Job> getJobWithPosition(@PathVariable("position") String position){
+        return jobService.retrieveJobByPosition(position);
+    }
     
 
     

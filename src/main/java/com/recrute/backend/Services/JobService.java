@@ -2,6 +2,9 @@ package com.recrute.backend.Services;
 
 import java.util.List;
 
+import org.springframework.data.repository.query.Param;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.recrute.backend.models.Job;
 
 public interface JobService {
@@ -18,4 +21,6 @@ public interface JobService {
 
    
     void deleteJob(Long id);
+    List<Job> retrieveJobByPosition(String position);
+
 }

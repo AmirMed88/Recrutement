@@ -48,7 +48,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     public Experience CreateAndAffectExperienceToProfile(Experience experience,Long idProfile){
 
         Profile prf=profileRepository.findById(idProfile).get();
-        experience.setProfile(prf);
+        experience.setProfilea(prf);
         experienceRepository.save(experience);
         
         return experience;
@@ -57,8 +57,10 @@ public class ExperienceServiceImpl implements ExperienceService {
     public void AssignExperienceToProfile(Long idProfile,Long idExperience){
 
         Profile prf=profileRepository.findById(idProfile).get();
+
         Experience ex=experienceRepository.findById(idExperience).get();
-        ex.setProfile(prf);
+        ex.setProfilea(prf);
+        profileRepository.save(prf);
         experienceRepository.save(ex);
         
         

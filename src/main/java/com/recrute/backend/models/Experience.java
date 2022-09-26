@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Experience implements Serializable {
@@ -45,23 +47,36 @@ public class Experience implements Serializable {
 	@Temporal(TemporalType.DATE)
     private Date ended;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
     @JoinColumn(name = "id")
-     Profile profile;
+    // @JsonIgnoreProperties(value = {
+    //     "experiences"
+    // })
+     Profile profilea;
 
 
 
+
+    
 
     public Experience() {
     }
+    public Experience( String workExp, String academicExp, Date started, Date ended, Profile profilea) {
+        
+        this.workExp = workExp;
+        this.academicExp = academicExp;
+        this.started = started;
+        this.ended = ended;
+        this.profilea = profilea;
+    }
 
-    public Experience(Long idExp, String workExp, String academicExp, Date started, Date ended, Profile profile) {
+    public Experience(Long idExp, String workExp, String academicExp, Date started, Date ended, Profile profilea) {
         this.idExp = idExp;
         this.workExp = workExp;
         this.academicExp = academicExp;
         this.started = started;
         this.ended = ended;
-        this.profile = profile;
+        this.profilea = profilea;
     }
 
     public Long getIdExp() {
@@ -104,12 +119,12 @@ public class Experience implements Serializable {
         this.ended = ended;
     }
 
-    public Profile getProfile() {
-        return this.profile;
+    public Profile getProfilea() {
+        return this.profilea;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfilea(Profile profilea) {
+        this.profilea = profilea;
     }
 
     public Experience idExp(Long idExp) {
@@ -137,8 +152,8 @@ public class Experience implements Serializable {
         return this;
     }
 
-    public Experience profile(Profile profile) {
-        setProfile(profile);
+    public Experience profilea(Profile profilea) {
+        setProfilea(profilea);
         return this;
     }
 
@@ -150,12 +165,12 @@ public class Experience implements Serializable {
             return false;
         }
         Experience experience = (Experience) o;
-        return Objects.equals(idExp, experience.idExp) && Objects.equals(workExp, experience.workExp) && Objects.equals(academicExp, experience.academicExp) && Objects.equals(started, experience.started) && Objects.equals(ended, experience.ended) && Objects.equals(profile, experience.profile);
+        return Objects.equals(idExp, experience.idExp) && Objects.equals(workExp, experience.workExp) && Objects.equals(academicExp, experience.academicExp) && Objects.equals(started, experience.started) && Objects.equals(ended, experience.ended) && Objects.equals(profilea, experience.profilea);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idExp, workExp, academicExp, started, ended, profile);
+        return Objects.hash(idExp, workExp, academicExp, started, ended, profilea);
     }
 
     @Override
@@ -166,10 +181,9 @@ public class Experience implements Serializable {
             ", academicExp='" + getAcademicExp() + "'" +
             ", started='" + getStarted() + "'" +
             ", ended='" + getEnded() + "'" +
-            ", profile='" + getProfile() + "'" +
+            ", profilea='" + getProfilea() + "'" +
             "}";
     }
-    
     
     
    

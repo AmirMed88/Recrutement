@@ -62,7 +62,7 @@ public class ContactServiceImpl implements ContactService {
     public Contact SaveContactWithProfile(Profile profile,Contact contact){
         
        
-        contact.setProfile(profile);
+        contact.setProfileb(profile);
         profileRepository.save(profile);
         contactRepository.save(contact);
         

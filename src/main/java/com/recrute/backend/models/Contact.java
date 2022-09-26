@@ -6,9 +6,11 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -37,23 +39,31 @@ public class Contact implements Serializable {
     private String phone;
 
     @OneToOne(cascade = CascadeType.ALL)
-    Profile profile;
+    @JoinColumn(name="id")
+    Profile profileb;
 
 
 
-    
-    
 
     public Contact() {
     }
 
-    public Contact(Long idContact, String fullname, String address, String email, String phone, Profile profile) {
+    public Contact(String fullname, String address, String email, String phone, Profile profileb) {
+        
+        this.fullname = fullname;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.profileb = profileb;
+    }
+
+    public Contact(Long idContact, String fullname, String address, String email, String phone, Profile profileb) {
         this.idContact = idContact;
         this.fullname = fullname;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.profile = profile;
+        this.profileb = profileb;
     }
 
     public Long getIdContact() {
@@ -96,12 +106,12 @@ public class Contact implements Serializable {
         this.phone = phone;
     }
 
-    public Profile getProfile() {
-        return this.profile;
+    public Profile getProfileb() {
+        return this.profileb;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setProfileb(Profile profileb) {
+        this.profileb = profileb;
     }
 
     public Contact idContact(Long idContact) {
@@ -129,8 +139,8 @@ public class Contact implements Serializable {
         return this;
     }
 
-    public Contact profile(Profile profile) {
-        setProfile(profile);
+    public Contact profileb(Profile profileb) {
+        setProfileb(profileb);
         return this;
     }
 
@@ -142,12 +152,12 @@ public class Contact implements Serializable {
             return false;
         }
         Contact contact = (Contact) o;
-        return Objects.equals(idContact, contact.idContact) && Objects.equals(fullname, contact.fullname) && Objects.equals(address, contact.address) && Objects.equals(email, contact.email) && Objects.equals(phone, contact.phone) && Objects.equals(profile, contact.profile);
+        return Objects.equals(idContact, contact.idContact) && Objects.equals(fullname, contact.fullname) && Objects.equals(address, contact.address) && Objects.equals(email, contact.email) && Objects.equals(phone, contact.phone) && Objects.equals(profileb, contact.profileb);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idContact, fullname, address, email, phone, profile);
+        return Objects.hash(idContact, fullname, address, email, phone, profileb);
     }
 
     @Override
@@ -158,10 +168,13 @@ public class Contact implements Serializable {
             ", address='" + getAddress() + "'" +
             ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
-            ", profile='" + getProfile() + "'" +
+            ", profileb='" + getProfileb() + "'" +
             "}";
     }
+    
+    
 
+    
     
 
 }
