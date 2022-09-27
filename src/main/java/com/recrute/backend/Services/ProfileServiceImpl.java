@@ -122,7 +122,10 @@ public class ProfileServiceImpl implements ProfileService {
     
     @Override
     public void updateProfile(Profile profile) {
+        // Profile a =profileRepository.findById(id).get();
+        // profile.setIdProfile(id);
         profileRepository.save(profile);
+        
     }
 
     @Override

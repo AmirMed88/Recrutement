@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -64,17 +65,21 @@ public class ProfileController {
         // public void triggerMail( @RequestBody String email ) throws
         // MessagingException {
         senderService.sendSimpleEmail(email,
-                "This is email body",
-                "This is email subject");
+                "Interview",
+                "Are you interested i joining our company");
+                
 
     }
 
-    @PutMapping("/updateProfile")
+    // @PatchMapping("/updateProfile/{id}")
+    // public void updateProfile(@RequestBody Profile profile, @PathVariable("id") Long id) {
+    //     profileService.updateProfile(profile,id);
+    // }
+    @PatchMapping("/updateProfile/{id}")
     public void updateProfile(@RequestBody Profile profile) {
         profileService.updateProfile(profile);
     }
-
-    @PutMapping("/approveprofile")
+    @PutMapping("/approveprofile/{id}")
     public void updateProfile(@PathVariable("id") Long id) {
         profileService.ApproveProfile(id);
     }
