@@ -10,6 +10,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -73,6 +74,11 @@ public class Profile implements Serializable {
     })
     Contact contact;
 
+    @OneToOne(mappedBy = "profilec", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties(value = {
+        "profilec"
+})
+    Attachment attachment;
     // public Profile(Long idProfile, List<Skill> skill, Date
     // createdAt,List<Experience> experiences) {
     // this.idProfile = idProfile;
@@ -92,6 +98,20 @@ public class Profile implements Serializable {
         this.experiences = experiences;
         this.contact = contact;
     }
+
+
+        // public Profile(List<Skill> skill, Boolean approval, String destination, Date createdAt, List<Education> educations, List<Experience> experiences, Contact contact, Attachment attachment) {
+                
+        //         this.skill = skill;
+        //         this.approval = approval;
+        //         this.destination = destination;
+        //         this.createdAt = createdAt;
+        //         this.educations = educations;
+        //         this.experiences = experiences;
+        //         this.contact = contact;
+        //         this.attachment = attachment;
+        // }
+
 
 
 }
